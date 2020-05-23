@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class Pirate : MonoBehaviour
@@ -9,6 +8,8 @@ public class Pirate : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpPower;
 
+    private bool grounded = false;
+
     private float direction;
     private bool jump = false;
 
@@ -17,6 +18,15 @@ public class Pirate : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+
+    private void Update()
+    {
+        grounded = CheckGrounded();    
+    }
+
+    private bool CheckGrounded() =>
+        Physics.Raycast(new Ray(transform.position, -Vector3.up), out RaycastHit raycastHit, Mathf.Infinity) && !Mathf.Approximately(raycastHit.distance, 0)
+            ? false : true;
 
     private void FixedUpdate()
     {
@@ -36,5 +46,5 @@ public class Pirate : MonoBehaviour
     }
 
     public void Move(float horizontal) => direction = horizontal;
-    public void Jump() => jump = true;
+    public void Jump() => jump = grounded ? true : false;
 }
