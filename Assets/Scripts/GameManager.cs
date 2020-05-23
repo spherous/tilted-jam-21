@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public int TotalCoins;
+    public Text CoinUI;
     void Start()
     {
         
@@ -16,6 +17,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         TotalCoins = PlayerPrefs.GetInt("Coins");
-        Debug.Log(TotalCoins);
+        CoinUI.text = "Coins Collected: " + TotalCoins;
     }
 }
