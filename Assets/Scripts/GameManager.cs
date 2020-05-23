@@ -13,8 +13,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         TotalCoins = PlayerPrefs.GetInt("TotalCoins");
-        Coins = PlayerPrefs.GetInt("Coins");
+        
         TotalCoinUI.text = "Total Coins Collected: " + TotalCoins;
         CoinUI.text = "Coins Collected: " + Coins;
+    }
+    public void IncreaseCurrentCoins()
+    {
+        Coins++;
     }
 }
