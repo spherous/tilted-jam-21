@@ -327,8 +327,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -965,7 +965,7 @@ PrefabInstance:
     - target: {fileID: 797768090118251552, guid: 300b25e50345266429b3fe4ddf4b0fa9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.23
       objectReference: {fileID: 0}
     - target: {fileID: 797768090118251552, guid: 300b25e50345266429b3fe4ddf4b0fa9,
         type: 3}
@@ -975,7 +975,7 @@ PrefabInstance:
     - target: {fileID: 797768090118251552, guid: 300b25e50345266429b3fe4ddf4b0fa9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 797768090118251552, guid: 300b25e50345266429b3fe4ddf4b0fa9,
         type: 3}
@@ -990,7 +990,7 @@ PrefabInstance:
     - target: {fileID: 797768090118251552, guid: 300b25e50345266429b3fe4ddf4b0fa9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 797768090118251552, guid: 300b25e50345266429b3fe4ddf4b0fa9,
         type: 3}
@@ -1000,7 +1000,7 @@ PrefabInstance:
     - target: {fileID: 797768090118251552, guid: 300b25e50345266429b3fe4ddf4b0fa9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 797768090118251552, guid: 300b25e50345266429b3fe4ddf4b0fa9,
         type: 3}
