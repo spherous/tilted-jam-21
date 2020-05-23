@@ -12,6 +12,7 @@ public class Pirate : MonoBehaviour
 
     private float direction;
     private bool jump = false;
+    private bool doubleJump = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,9 +25,14 @@ public class Pirate : MonoBehaviour
         grounded = CheckGrounded();    
     }
 
-    private bool CheckGrounded() =>
-        Physics.Raycast(new Ray(transform.position, -Vector3.up), out RaycastHit raycastHit, Mathf.Infinity) && !Mathf.Approximately(raycastHit.distance, 0)
-            ? false : true;
+    private bool CheckGrounded()
+    {
+        if(Physics.Raycast(new Ray(transform.position + (Vector3.up * 0.001f), -Vector3.up), out RaycastHit raycastHit, Mathf.Infinity) && raycastHit.distance >= .01f)
+            return false;
+        else
+            return true;
+
+    }
 
     private void FixedUpdate()
     {
@@ -35,6 +41,11 @@ public class Pirate : MonoBehaviour
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             jump = false;
         }
+        // if(doubleJump)
+        // {
+        //     rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        //     doubleJump = false;
+        // }
 
         if(direction == 0)
             return;
