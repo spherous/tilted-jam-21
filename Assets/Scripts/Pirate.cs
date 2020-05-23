@@ -7,13 +7,17 @@ public class Pirate : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpPower;
+    
+    private float direction;
 
     private bool grounded = false;
-
-    private float direction;
     private bool jump = false;
-    private bool airJump = true;
+    private bool jumpLock = false;
+    private bool airJump = false;
     private bool airJumpLock = false;
+
+    private float jumpLockDelaySeconds = 0.16f;
+    private float jumpLockDelayed = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -28,16 +32,27 @@ public class Pirate : MonoBehaviour
         {
             // Check if we are becoming grounded
             grounded = CheckGrounded();
-            // if so, reset air jump
+            // if so, reset locks
             if(grounded)
             {
                 airJump = false;
                 airJumpLock = false;
+                jumpLock = false;
+                jumpLockDelayed = 0;
             }
+            else if(jumpLockDelayed < jumpLockDelaySeconds)
+                jumpLockDelayed += Time.deltaTime;
+            else if(jumpLockDelayed >= jumpLockDelaySeconds && !jumpLock)
+                jumpLock = true;
         }
         else
         {
             grounded = CheckGrounded();
+            // left platform
+            if(!grounded)
+            {
+                // jumpLockDelayed++;
+            }
         }
     }
 
@@ -51,14 +66,15 @@ public class Pirate : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(jump && grounded)
+        if(jump)
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             jump = false;
+            jumpLock = true;
         }
-        if(airJump && !airJumpLock && !grounded)
+        if(airJump)
         {
-            rb.AddForce(Vector3.up * jumpPower * 0.5f, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpPower * 0.75f, ForceMode.Impulse);
             airJump = false;
             airJumpLock = true;
         }
@@ -75,7 +91,7 @@ public class Pirate : MonoBehaviour
     public void Move(float horizontal) => direction = horizontal;
     public void Jump()
     {
-        if(grounded && !jump)
+        if(!jump && !jumpLock)
             jump = true;
         else if(!grounded && !airJump && !airJumpLock)
             airJump = true;
