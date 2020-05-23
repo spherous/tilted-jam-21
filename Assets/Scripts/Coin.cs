@@ -18,24 +18,29 @@ public class Coin : MonoBehaviour
         if (other.transform.gameObject.GetComponent<Pirate>() != null)
         {
             CurrentAmountCoins = TotalCoins+1;
-            ActualCurrentCoins++;
+            
             PlayerPrefs.SetInt("TotalCoins", CurrentAmountCoins);
-            PlayerPrefs.SetInt("Coins", ActualCurrentCoins);
+            
             Destroy(this.gameObject);
         }
+        ActualCurrentCoins = ActualCurrentCoins + 1;
+        PlayerPrefs.SetInt("Coins", ActualCurrentCoins);
     }
 
 
     void Start()
     {
-        
+        ActualCurrentCoins = 0;
+        PlayerPrefs.SetInt("Coins", ActualCurrentCoins);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        TotalCoins = PlayerPrefs.GetInt("Coins", 0);
+        TotalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
         transform.Rotate(new Vector3(0, 0, 45) * Time.deltaTime *2);
+        
 
     }
 
