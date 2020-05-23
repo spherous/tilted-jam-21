@@ -12,7 +12,8 @@ public class Pirate : MonoBehaviour
 
     private float direction;
     private bool jump = false;
-    private bool doubleJump = true;
+    private bool airJump = true;
+    private bool airJumpLock = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,22 @@ public class Pirate : MonoBehaviour
 
     private void Update()
     {
-        grounded = CheckGrounded();    
+        // if we were not grounded
+        if(!grounded)
+        {
+            // Check if we are becoming grounded
+            grounded = CheckGrounded();
+            // if so, reset air jump
+            if(grounded)
+            {
+                airJump = false;
+                airJumpLock = false;
+            }
+        }
+        else
+        {
+            grounded = CheckGrounded();
+        }
     }
 
     private bool CheckGrounded()
@@ -31,21 +47,21 @@ public class Pirate : MonoBehaviour
             return false;
         else
             return true;
-
     }
 
     private void FixedUpdate()
     {
-        if(jump)
+        if(jump && grounded)
         {
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             jump = false;
         }
-        // if(doubleJump)
-        // {
-        //     rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-        //     doubleJump = false;
-        // }
+        if(airJump && !airJumpLock && !grounded)
+        {
+            rb.AddForce(Vector3.up * jumpPower * 0.5f, ForceMode.Impulse);
+            airJump = false;
+            airJumpLock = true;
+        }
 
         if(direction == 0)
             return;
@@ -57,5 +73,11 @@ public class Pirate : MonoBehaviour
     }
 
     public void Move(float horizontal) => direction = horizontal;
-    public void Jump() => jump = grounded ? true : false;
+    public void Jump()
+    {
+        if(grounded && !jump)
+            jump = true;
+        else if(!grounded && !airJump && !airJumpLock)
+            airJump = true;
+    }
 }

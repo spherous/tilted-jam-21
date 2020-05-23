@@ -10,6 +10,7 @@ public class Coin : MonoBehaviour
     public int CoinValue = 1;
     public int TotalCoins = 0;
     public int CurrentAmountCoins;
+    public int ActualCurrentCoins = 0;
 
 
     void OnTriggerEnter(Collider other)
@@ -17,7 +18,9 @@ public class Coin : MonoBehaviour
         if (other.transform.gameObject.GetComponent<Pirate>() != null)
         {
             CurrentAmountCoins = TotalCoins+1;
-            PlayerPrefs.SetInt("Coins", CurrentAmountCoins);
+            ActualCurrentCoins++;
+            PlayerPrefs.SetInt("TotalCoins", CurrentAmountCoins);
+            PlayerPrefs.SetInt("Coins", ActualCurrentCoins);
             Destroy(this.gameObject);
         }
     }
