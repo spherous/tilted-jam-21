@@ -12,5 +12,7 @@ public class InputHandler : MonoBehaviour
     void Update()
     {
         pirate?.Move(Input.GetAxis("Horizontal"));
+        if(Input.GetKeyDown(KeyCode.Space))
+            pirate?.Jump();
     }
 }
