@@ -17,14 +17,14 @@ public class CloudSpawn : MonoBehaviour
 
         lookAlive.pos_freq.x = Random.value * pos_freq;
         lookAlive.pos_freq.y = Random.value * pos_freq;
-        lookAlive.pos_freq.z = Random.value * pos_freq;
+        //lookAlive.pos_freq.z = Random.value * pos_freq;
 
         float amplitude = 5.0f;
         float amplitude_min = 0;
 
         lookAlive.pos_amplitude.x = (Random.value * amplitude) + amplitude_min;
         lookAlive.pos_amplitude.y = (Random.value * amplitude) + amplitude_min;
-        lookAlive.pos_amplitude.z = (Random.value * amplitude) + amplitude_min;
+        //lookAlive.pos_amplitude.z = (Random.value * amplitude) + amplitude_min;
 
     }
 

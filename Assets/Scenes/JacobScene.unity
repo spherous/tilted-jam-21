@@ -165,9 +165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 876347797220729671, guid: 17b132479d75657428720a637fbddc3b, type: 3}
-  x_span_amplitude: 15
-  y_span_amplitude: 15
-  z_span_amplitude: 15
+  x_span_amplitude: 30
+  y_span_amplitude: 30
+  z_span_amplitude: 0
   NumberOfClouds: 50
 --- !u!1 &549253356
 GameObject:
