@@ -17,6 +17,7 @@ public class Coin : MonoBehaviour
         if (other.transform.gameObject.GetComponent<Pirate>() != null)
         {
             CurrentAmountCoins = TotalCoins+1;
+            PlayerPrefs.SetInt("TotalCoins", CurrentAmountCoins);
             PlayerPrefs.SetInt("Coins", CurrentAmountCoins);
             Destroy(this.gameObject);
         }
