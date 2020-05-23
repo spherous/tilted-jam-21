@@ -5,12 +5,16 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public int TotalCoins;
+    public int Coins;
+    public TextMeshProUGUI TotalCoinUI;
     public TextMeshProUGUI CoinUI;
 
     // Update is called once per frame
     void Update()
     {
-        TotalCoins = PlayerPrefs.GetInt("Coins");
-        CoinUI.text = "Coins Collected: " + TotalCoins;
+        TotalCoins = PlayerPrefs.GetInt("TotalCoins");
+        Coins = PlayerPrefs.GetInt("Coins");
+        TotalCoinUI.text = "Total Coins Collected: " + TotalCoins;
+        CoinUI.text = "Coins Collected: " + Coins;
     }
 }
