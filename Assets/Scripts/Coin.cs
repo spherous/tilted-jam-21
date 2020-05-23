@@ -5,6 +5,12 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     // Start is called before the first frame update
+    void OnTriggerEnter(Collider other)
+    {
+       
+    }
+
+
     void Start()
     {
         
@@ -15,4 +21,6 @@ public class Coin : MonoBehaviour
     {
         
     }
+
+    
 }
