@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class Pirate : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rigidbody;
-    public float speed;
-    private Vector2 velocity;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private float acceleration;
+
+    public float maxSpeed;
+    private float direction;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        rigidbody.AddForce(velocity * speed);
+        if(rb.velocity.magnitude != maxSpeed)
+        {
+            rb.AddForce(new Vector3(direction, 0, 0) * acceleration);
+        }
     }
 
     public void Move(float horizontal)
     {
-        velocity = new Vector2(horizontal, velocity.y);
+        direction = horizontal;
     }
 }
