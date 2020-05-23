@@ -5,20 +5,22 @@ using UnityEngine;
 public class Pirate : MonoBehaviour
 {
     [SerializeField] private Rigidbody rigidbody;
+    public float speed;
+    private Vector2 velocity;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        rigidbody.AddForce(velocity * speed);
     }
 
     public void Move(float horizontal)
     {
-        
+        velocity = new Vector2(horizontal, velocity.y);
     }
 }
