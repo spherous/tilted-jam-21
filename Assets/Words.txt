@@ -1,24 +1,21 @@
-Dinosaur
-Empty
+Dinosaur - Noun 4
+Empty - Applied to pirate
 
 Round 1
-    Pirate
-    Sirenhead
-    Explosions
-    DANCED
+    Pirate - Noun 1
+    Sirenhead - Noun 2
+    Explosions - Noun 3
+    DANCED - Verb
 
 
-
-
-
-Once upon a time a (Noun 1)’s family was starving.
-When a mythical (Noun 2) saw their plight and came to help 
-(Noun 1) climbed onto (Noun 2)'s (Noun 4)
-They both (Verb) far into the clouds, until a (Noun-3) appeared filled with gold and riches 
-The (Noun 2) spoke, “head my word, take only what you need“
-The (Noun 1) never having seen so much, wanted it all 
-(Noun 1) stuffed pockets, pants, and shirt, as full as possible
-(Noun 1) climbed onto (Noun 2)'s (Noun 4)
-(Noun 2) grimaced and started to (Verb) away 
-The weight was too much to bare for (Noun 2) 
-A day later the (Noun 2) (Verb-past-tense) over the poor family's home, and it could see the family had one less mouth to feed.
+Once upon a time an Empty Pirate’s family was starving.
+When a mythical Sirenhead saw their plight and came to help 
+The Empty Pirate climbed onto Sirenhead's Dinosaur Body
+They both DANCED far into the clouds, until Explosions appeared filled with gold and riches 
+The Sirenhead spoke, “head my word, take only what you need“
+The Empty Pirate never having seen so much, wanted it all 
+The Empty Pirate stuffed pockets, pants, and shirt, as full as possible
+The Empty Pirate climbed onto Sirenhead's Dinosaur Body
+Sirenhead grimaced and started to DANCE away 
+The weight was too much to bare for Sirenhead 
+A day later the Sirenhead DANCED over the poor family's home, and it could see the family had one less mouth to feed.
