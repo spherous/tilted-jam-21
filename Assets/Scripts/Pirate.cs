@@ -6,8 +6,8 @@ public class Pirate : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float acceleration;
+    [SerializeField] private float maxSpeed;
 
-    public float maxSpeed;
     private float direction;
 
     // Start is called before the first frame update
@@ -24,8 +24,5 @@ public class Pirate : MonoBehaviour
         }
     }
 
-    public void Move(float horizontal)
-    {
-        direction = horizontal;
-    }
+    public void Move(float horizontal) => direction = horizontal;
 }

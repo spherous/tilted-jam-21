@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3216579607376765842}
   - component: {fileID: 3216579607376765841}
   - component: {fileID: 3216579607376765840}
-  - component: {fileID: 4785819957463025204}
   - component: {fileID: 3678880466232804797}
+  - component: {fileID: 4785819957463025204}
   m_Layer: 8
   m_Name: Pirate
   m_TagString: Untagged
@@ -95,21 +95,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4785819957463025204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3216579607376765839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa6ad495e15d6f1458cb2c89990423b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  acceleration: 50
-  maxSpeed: 200
 --- !u!54 &3678880466232804797
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,3 +111,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &4785819957463025204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3216579607376765839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6ad495e15d6f1458cb2c89990423b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 3678880466232804797}
+  acceleration: 50
+  maxSpeed: 200
