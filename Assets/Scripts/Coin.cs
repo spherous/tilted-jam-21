@@ -3,19 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Coin : MonoBehaviour
 {
     // Start is called before the first frame update
     public int CoinValue = 1;
-    public int TotalCoins;
+    public int TotalCoins = 0;
     public int CurrentAmountCoins;
 
 
     void OnTriggerEnter(Collider other)
     {
-        if (gameObject.GetComponent<Pirate>()!=null)
+        if (other.transform.gameObject.GetComponent<Pirate>() != null)
         {
-            CurrentAmountCoins = TotalCoins++;
+            CurrentAmountCoins = TotalCoins+1;
             PlayerPrefs.SetInt("Coins", CurrentAmountCoins);
             Destroy(this.gameObject);
         }
@@ -31,6 +32,8 @@ public class Coin : MonoBehaviour
     void Update()
     {
         TotalCoins = PlayerPrefs.GetInt("Coins", 0);
+        transform.Rotate(new Vector3(0, 0, 45) * Time.deltaTime *2);
+
     }
 
     
