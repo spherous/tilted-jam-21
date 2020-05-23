@@ -1,14 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class Pirate : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float acceleration;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float jumpPower;
 
-    public float maxSpeed;
+    private bool grounded = false;
+
     private float direction;
+    private bool jump = false;
 
     // Start is called before the first frame update
     void Start()
@@ -16,16 +19,32 @@ public class Pirate : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if(rb.velocity.magnitude != maxSpeed)
-        {
-            rb.AddForce(new Vector3(direction, 0, 0) * acceleration);
-        }
+        grounded = CheckGrounded();    
     }
 
-    public void Move(float horizontal)
+    private bool CheckGrounded() =>
+        Physics.Raycast(new Ray(transform.position, -Vector3.up), out RaycastHit raycastHit, Mathf.Infinity) && !Mathf.Approximately(raycastHit.distance, 0)
+            ? false : true;
+
+    private void FixedUpdate()
     {
-        direction = horizontal;
+        if(jump)
+        {
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            jump = false;
+        }
+
+        if(direction == 0)
+            return;
+            
+        float newSpeed = Mathf.Abs(rb.velocity.x + (direction * acceleration) * Time.deltaTime);
+        rb.velocity = newSpeed <= maxSpeed 
+            ? new Vector3(direction * newSpeed, rb.velocity.y, 0)
+            : new Vector3(direction * maxSpeed, rb.velocity.y, 0);
     }
+
+    public void Move(float horizontal) => direction = horizontal;
+    public void Jump() => jump = grounded ? true : false;
 }
