@@ -6,9 +6,9 @@ public class Spawner : MonoBehaviour
 {
     public GameObject prefab;
     public GameObject coin;
-    public float x_span_amplitude = 50;
-    public float y_span_amplitude = 50;
-    public float z_span_amplitude = 0;
+    public float x_span_amplitude = 100;
+    public float y_span_amplitude = 100;
+    public float z_span_amplitude = 100;
     public int NumberOfClouds = 75;
     public int NumberOfCoins = 50;
 
