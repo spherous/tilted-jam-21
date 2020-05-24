@@ -34,6 +34,7 @@ public class Pirate : MonoBehaviour
     public AudioClip jumpingSound;
     public AudioClip jumpingAirSound;
     public AudioClip jumpingWallSound;
+    public AudioClip begginingDialog;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,7 @@ public class Pirate : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         audio = GetComponent<AudioSource>();
+        audio.PlayOneShot(begginingDialog, 0.7f);
         
     }
 
