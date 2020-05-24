@@ -30,7 +30,7 @@ public class Pirate : MonoBehaviour
         // if we were not grounded
         if(!grounded)
         {
-            // Check if we are becoming grounded
+            // Check if we are becoming grounded this frame
             grounded = CheckGrounded();
             // if so, reset locks
             if(grounded)
@@ -39,21 +39,47 @@ public class Pirate : MonoBehaviour
                 airJumpLock = false;
                 jumpLock = false;
                 jumpLockDelayed = 0;
+                return;
             }
+            // We are in the air
+            // Give some leway on a jump
             else if(jumpLockDelayed < jumpLockDelaySeconds)
                 jumpLockDelayed += Time.deltaTime;
             else if(jumpLockDelayed >= jumpLockDelaySeconds && !jumpLock)
                 jumpLock = true;
-        }
-        else
-        {
-            grounded = CheckGrounded();
-            // left platform
-            if(!grounded)
+            
+            // Debug.Log(CanWallJump());
+
+            if(CanWallJump())
             {
-                // jumpLockDelayed++;
+                
             }
         }
+        // If we were on the ground
+        else
+        {
+            // Check if we left a platform this frame
+            grounded = CheckGrounded();
+            if(!grounded)
+            {    
+            }
+        }
+    }
+
+    private bool CanWallJump()
+    {
+        Collider[] rightSide = Physics.OverlapBox(new Vector3(transform.position.x + .55f, transform.position.y, transform.position.z), new Vector3(.01f, 0f, 0f));
+        Collider[] leftSide = Physics.OverlapBox(new Vector3(transform.position.x - .55f, transform.position.y, transform.position.z), new Vector3(.01f, 0f, 0f));
+        
+        // Debug.Log($"right side: {rightSide.Length}, Left Side: {leftSide.Length}");
+        // foreach(Collider c in rightSide)
+        //     Debug.Log($"Right side hit {c.gameObject.name}");
+        // foreach(Collider c in leftSide)
+        //     Debug.Log($"Left side hit {c.gameObject.name}");
+
+        if(rightSide.Length > 0 || leftSide.Length > 0)
+            return true;
+        return false;
     }
 
     private bool CheckGrounded()
@@ -95,5 +121,10 @@ public class Pirate : MonoBehaviour
             jump = true;
         else if(!grounded && !airJump && !airJumpLock)
             airJump = true;
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawCube(new Vector3(transform.position.x + .51f, transform.position.y + 0.5f, transform.position.z), new Vector3(.01f, 1f, 1f));
+        Gizmos.DrawCube(new Vector3(transform.position.x - .51f, transform.position.y + 0.5f, transform.position.z), new Vector3(.01f, 1f, 1f));
     }
 }
