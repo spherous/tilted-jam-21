@@ -13,6 +13,7 @@ public class Coin : MonoBehaviour
     public int CurrentAmountCoins;
     public int ActualCurrentCoins = 0;
     public GameManager manager;
+    
 
     void OnTriggerEnter(Collider other)
     {
@@ -22,6 +23,7 @@ public class Coin : MonoBehaviour
             
             PlayerPrefs.SetInt("TotalCoins", CurrentAmountCoins);
             manager.IncreaseCurrentCoins();
+           
             Destroy(this.gameObject);
         }
       
@@ -33,6 +35,7 @@ public class Coin : MonoBehaviour
     {
         ActualCurrentCoins = 0;
         PlayerPrefs.SetInt("Coins", ActualCurrentCoins);
+        
 
     }
 
