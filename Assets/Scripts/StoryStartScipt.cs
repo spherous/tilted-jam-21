@@ -39,7 +39,7 @@ public class StoryStartScipt : MonoBehaviour
         {
             pirate.SetBool("falling", true);
             float percent = (Time.time - start_jump_time) / (start_ride_time - start_jump_time);
-            Debug.Log(percent);
+            // Debug.Log(percent);
             rb_pirate.MovePosition(
                Vector3.Lerp(goJumpPoint.transform.position, rb_siren_head.transform.position, percent));
         }
@@ -54,7 +54,7 @@ public class StoryStartScipt : MonoBehaviour
             offset.x = vel_pirate;
             //rb_pirate.MovePosition(rb_pirate.position + offset);
             float percent = (Time.time- start_walking_time) / (start_idle_time - start_walking_time);
-            Debug.Log(percent);
+            // Debug.Log(percent);
             rb_pirate.MovePosition(
                 Vector3.Lerp(goStartPoint.transform.position, 
                              goJumpPoint.transform.position, 
