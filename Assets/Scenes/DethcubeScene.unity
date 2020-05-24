@@ -1454,6 +1454,16 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 4785819957463025204, guid: c45aba91ca813e244a92ea089203c1fe,
+        type: 3}
+      propertyPath: begginingDialog
+      value: 
+      objectReference: {fileID: 8300000, guid: 28ff3154b2699654db0f7c3b74fb221e, type: 3}
+    - target: {fileID: 4785819957463025204, guid: c45aba91ca813e244a92ea089203c1fe,
+        type: 3}
+      propertyPath: walkingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4010977715a7cdf4a8be83dde64e280f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c45aba91ca813e244a92ea089203c1fe, type: 3}
 --- !u!4 &3216579606190886209 stripped

@@ -27,7 +27,6 @@ public class Pirate : MonoBehaviour
     private bool performWallJump = false;
     private bool wallJumpLeft = false;
     private bool wallJumpRight = false;
-
     public AudioSource audio;
     public AudioClip coinCollected;
     public AudioClip walkingSound;
@@ -162,6 +161,7 @@ public class Pirate : MonoBehaviour
         {
             animator.SetBool("walking", false);
             animator.SetTrigger("Idle");
+            
             return;
         }
 
@@ -182,6 +182,7 @@ public class Pirate : MonoBehaviour
             animator.SetBool("walking", true);
         direction = horizontal;
         
+       
     }
     public void Jump()
     {
