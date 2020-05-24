@@ -7,13 +7,14 @@ public class CloudSpawner : MonoBehaviour
     public GameObject prefab;
     public float x_span_amplitude = 50;
     public float y_span_amplitude = 50;
-    public float z_span_amplitude = 50;
+    public float z_span_amplitude = 0;
     public int NumberOfClouds = 50;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < NumberOfClouds; i++)
+        z_span_amplitude = 0;
+        for (int i = 0; i < NumberOfClouds; i++)
         {
             // Instantiate at position (0, 0, 0) and zero rotation.
             Instantiate(prefab, new Vector3((Random.value - 0.5f ) * 2 * x_span_amplitude,
