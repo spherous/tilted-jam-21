@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 
@@ -11,7 +12,7 @@ public class Coin : MonoBehaviour
     public int TotalCoins = 0;
     public int CurrentAmountCoins;
     public int ActualCurrentCoins = 0;
-
+    public GameManager manager;
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,11 +21,11 @@ public class Coin : MonoBehaviour
             CurrentAmountCoins = TotalCoins+1;
             
             PlayerPrefs.SetInt("TotalCoins", CurrentAmountCoins);
-            
+            manager.IncreaseCurrentCoins();
             Destroy(this.gameObject);
         }
-        ActualCurrentCoins = ActualCurrentCoins + 1;
-        PlayerPrefs.SetInt("Coins", ActualCurrentCoins);
+      
+        
     }
 
 
@@ -40,7 +41,9 @@ public class Coin : MonoBehaviour
     {
         TotalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
         transform.Rotate(new Vector3(0, 0, 45) * Time.deltaTime *2);
-        
+       
+        manager = FindObjectOfType<GameManager>();
+
 
     }
 
