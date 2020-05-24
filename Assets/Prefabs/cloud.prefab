@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1447273553557428123}
   - component: {fileID: 9153712183503271966}
   - component: {fileID: 9153712183503271954}
-  - component: {fileID: 9153712183503271967}
   - component: {fileID: 9153712183503271953}
   m_Layer: 8
   m_Name: cloud
@@ -114,30 +113,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04, y: 0.015, z: 0.03}
   m_Center: {x: -0.0055769254, y: 0.00035448186, z: -0.0032069236}
---- !u!114 &9153712183503271967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 876347797220729671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bacc0dbe714a19045aa0001ddb4b7652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x_rot_func: 0
-  y_rot_func: 1
-  z_rot_func: 0
-  rot_freq: {x: 0, y: 0.5, z: 0}
-  rot_amplitude: {x: 0, y: 1, z: 0}
-  rot_phase: {x: 0, y: 0, z: 0}
-  x_pos_func: 3
-  y_pos_func: 3
-  z_pos_func: 0
-  pos_freq: {x: 0.05, y: 0.05, z: 0}
-  pos_amplitude: {x: 5, y: 5, z: 0}
-  pos_phase: {x: 0, y: 0, z: 0}
 --- !u!114 &9153712183503271953
 MonoBehaviour:
   m_ObjectHideFlags: 0
