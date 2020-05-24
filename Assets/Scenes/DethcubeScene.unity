@@ -519,7 +519,7 @@ MonoBehaviour:
   prefab: {fileID: 163442506}
   x_span_amplitude: 50
   y_span_amplitude: 50
-  z_span_amplitude: 50
+  z_span_amplitude: 0
   NumberOfClouds: 50
 --- !u!1001 &1164877491
 PrefabInstance:
