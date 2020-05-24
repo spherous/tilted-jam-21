@@ -13,15 +13,18 @@ public class Coin : MonoBehaviour
     public int CurrentAmountCoins;
     public int ActualCurrentCoins = 0;
     public GameManager manager;
-    
+    public Pirate player;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.transform.gameObject.GetComponent<Pirate>() != null)
         {
+            TotalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
             CurrentAmountCoins = TotalCoins+1;
-            
+            player = FindObjectOfType<Pirate>();
+            player.PlayCoinSound();
             PlayerPrefs.SetInt("TotalCoins", CurrentAmountCoins);
+            manager = FindObjectOfType<GameManager>();
             manager.IncreaseCurrentCoins();
            
             Destroy(this.gameObject);
@@ -42,10 +45,10 @@ public class Coin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TotalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
+        
         transform.Rotate(new Vector3(0, 0, 45) * Time.deltaTime *2);
        
-        manager = FindObjectOfType<GameManager>();
+        
 
 
     }
