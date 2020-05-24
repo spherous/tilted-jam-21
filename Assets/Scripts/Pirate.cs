@@ -4,6 +4,7 @@ using UnityEngine;
 public class Pirate : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private Animator animator;
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpPower;
@@ -20,9 +21,9 @@ public class Pirate : MonoBehaviour
     private float jumpLockDelaySeconds = 0.16f;
     private float jumpLockDelayed = 0;
 
-    private Vector3 leftOffset = new Vector3(-.52f, .5f, 0);
-    private Vector3 rightOffset = new Vector3(.52f, .5f, 0);
-    private Vector3 sideCheckColliderSize = new Vector3(.01f, .95f, 1f);
+    private Vector3 leftOffset = new Vector3(-.32f, .75f, 0);
+    private Vector3 rightOffset = new Vector3(.32f, .75f, 0);
+    private Vector3 sideCheckColliderSize = new Vector3(.01f, 1.4f, 1f);
 
     private bool performWallJump = false;
     private bool wallJumpLeft = false;
@@ -32,6 +33,7 @@ public class Pirate : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -44,6 +46,7 @@ public class Pirate : MonoBehaviour
             // if so, reset locks
             if(grounded)
             {
+                animator.SetBool("falling", false);
                 airJump = false;
                 airJumpLock = false;
                 jumpLock = false;
@@ -67,6 +70,7 @@ public class Pirate : MonoBehaviour
             grounded = CheckGrounded();
             if(!grounded)
             {    
+                animator.SetBool("falling", true);
             }
         }
     }
@@ -92,12 +96,15 @@ public class Pirate : MonoBehaviour
     private void DoWallJump()
     {
         if(wallJumpRight)
+        {
             rb.velocity = new Vector3(-.5f, .5f, 0) * jumpPower/10;
-            // rb.AddForce(new Vector3(.5f, .5f, 0) * jumpPower, ForceMode.Impulse);
+            animator.transform.rotation = Quaternion.Euler(0,-90,0);
+        }
         else if(wallJumpLeft)
+        {
             rb.velocity = new Vector3(.5f, .5f, 0) * jumpPower/10;
-            // rb.AddForce(new Vector3(.5f, .5f, 0) * jumpPower, ForceMode.Impulse);
-        
+            animator.transform.rotation = Quaternion.Euler(0,90,0);
+        }
     }
 
     private bool CheckGrounded()
@@ -115,9 +122,11 @@ public class Pirate : MonoBehaviour
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             jump = false;
             jumpLock = true;
+            animator.SetBool("falling", true);
         }
         if(airJump)
         {
+            animator.SetBool("falling", true);
             rb.AddForce(Vector3.up * jumpPower * 0.75f, ForceMode.Impulse);
             airJump = false;
             airJumpLock = true;
@@ -125,6 +134,7 @@ public class Pirate : MonoBehaviour
 
         if(performWallJump)
         {
+            animator.SetBool("falling", true);
             DoWallJump();
             airJump = false;
             airJumpLock = false;
@@ -132,15 +142,29 @@ public class Pirate : MonoBehaviour
         }
 
         if(direction == 0)
+        {
+            animator.SetBool("walking", false);
+            animator.SetTrigger("Idle");
             return;
-            
+        }
+
+        if(direction < 0)
+            animator.transform.rotation = Quaternion.Euler(0,-90,0);
+        else if(direction > 0)
+            animator.transform.rotation = Quaternion.Euler(0,90,0);
+
         float newSpeed = Mathf.Abs(rb.velocity.x + (direction * acceleration) * Time.deltaTime);
         rb.velocity = newSpeed <= maxSpeed 
             ? new Vector3(direction * newSpeed, rb.velocity.y, 0)
             : new Vector3(direction * maxSpeed, rb.velocity.y, 0);
     }
 
-    public void Move(float horizontal) => direction = horizontal;
+    public void Move(float horizontal)
+    {
+        if(horizontal != 0)
+            animator.SetBool("walking", true);
+        direction = horizontal;
+    }
     public void Jump()
     {
         if(!jump && !jumpLock)
