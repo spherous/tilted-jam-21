@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
 using UnityEngine;
 
 public class Pirate : MonoBehaviour
@@ -11,7 +12,9 @@ public class Pirate : MonoBehaviour
     [SerializeField] private LayerMask wallJumpCheckMask;
     
     private float direction;
-
+    public AudioClip coinCollected;
+    public AudioClip walkingSound;
+    public AudioClip jumpingSound;
     private bool grounded = false;
     private bool jump = false;
     private bool jumpLock = false;
@@ -24,7 +27,7 @@ public class Pirate : MonoBehaviour
     private Vector3 leftOffset = new Vector3(-.32f, .75f, 0);
     private Vector3 rightOffset = new Vector3(.32f, .75f, 0);
     private Vector3 sideCheckColliderSize = new Vector3(.01f, 1.4f, 1f);
-
+    public AudioSource audio;
     private bool performWallJump = false;
     private bool wallJumpLeft = false;
     private bool wallJumpRight = false;
@@ -34,6 +37,8 @@ public class Pirate : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        audio = GetComponent<AudioSource>();
+        
     }
 
     private void Update()
@@ -75,6 +80,10 @@ public class Pirate : MonoBehaviour
         }
     }
 
+    public void PlayCoinSound()
+    {
+        audio.PlayOneShot(coinCollected);
+    }
     private void CheckWallJumps()
     {
         wallJumpLeft = false;
@@ -119,6 +128,7 @@ public class Pirate : MonoBehaviour
     {
         if(jump)
         {
+            audio.PlayOneShot(jumpingSound, 0.7f);
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             jump = false;
             jumpLock = true;
@@ -164,9 +174,12 @@ public class Pirate : MonoBehaviour
         if(horizontal != 0)
             animator.SetBool("walking", true);
         direction = horizontal;
+        
     }
     public void Jump()
     {
+
+        
         if(!jump && !jumpLock)
             jump = true;
         else if(wallJumpRight || wallJumpLeft)

@@ -13,7 +13,7 @@ public class Coin : MonoBehaviour
     public int CurrentAmountCoins;
     public int ActualCurrentCoins = 0;
     public GameManager manager;
-    
+    public Pirate player;
 
     void OnTriggerEnter(Collider other)
     {
@@ -21,7 +21,8 @@ public class Coin : MonoBehaviour
         {
             TotalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
             CurrentAmountCoins = TotalCoins+1;
-            
+            player = FindObjectOfType<Pirate>();
+            player.PlayCoinSound();
             PlayerPrefs.SetInt("TotalCoins", CurrentAmountCoins);
             manager = FindObjectOfType<GameManager>();
             manager.IncreaseCurrentCoins();
