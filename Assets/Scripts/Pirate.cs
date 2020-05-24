@@ -12,9 +12,6 @@ public class Pirate : MonoBehaviour
     [SerializeField] private LayerMask wallJumpCheckMask;
     
     private float direction;
-    public AudioClip coinCollected;
-    public AudioClip walkingSound;
-    public AudioClip jumpingSound;
     private bool grounded = false;
     private bool jump = false;
     private bool jumpLock = false;
@@ -27,10 +24,16 @@ public class Pirate : MonoBehaviour
     private Vector3 leftOffset = new Vector3(-.32f, .75f, 0);
     private Vector3 rightOffset = new Vector3(.32f, .75f, 0);
     private Vector3 sideCheckColliderSize = new Vector3(.01f, 1.4f, 1f);
-    public AudioSource audio;
     private bool performWallJump = false;
     private bool wallJumpLeft = false;
     private bool wallJumpRight = false;
+
+    public AudioSource audio;
+    public AudioClip coinCollected;
+    public AudioClip walkingSound;
+    public AudioClip jumpingSound;
+    public AudioClip jumpingAirSound;
+    public AudioClip jumpingWallSound;
 
     // Start is called before the first frame update
     void Start()
@@ -136,6 +139,7 @@ public class Pirate : MonoBehaviour
         }
         if(airJump)
         {
+            audio.PlayOneShot(jumpingAirSound, 0.7f);
             animator.SetBool("falling", true);
             rb.AddForce(Vector3.up * jumpPower * 0.75f, ForceMode.Impulse);
             airJump = false;
@@ -144,6 +148,7 @@ public class Pirate : MonoBehaviour
 
         if(performWallJump)
         {
+            audio.PlayOneShot(jumpingWallSound, 0.7f);
             animator.SetBool("falling", true);
             DoWallJump();
             airJump = false;
