@@ -110,3 +110,5 @@ MonoBehaviour:
   CoinValue: 1
   TotalCoins: 0
   CurrentAmountCoins: 0
+  ActualCurrentCoins: 0
+  manager: {fileID: 0}
