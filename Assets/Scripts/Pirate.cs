@@ -7,6 +7,7 @@ public class Pirate : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float jumpPower;
+    [SerializeField] private LayerMask wallJumpCheckMask;
     
     private float direction;
 
@@ -18,6 +19,14 @@ public class Pirate : MonoBehaviour
 
     private float jumpLockDelaySeconds = 0.16f;
     private float jumpLockDelayed = 0;
+
+    private Vector3 leftOffset = new Vector3(-.52f, .5f, 0);
+    private Vector3 rightOffset = new Vector3(.52f, .5f, 0);
+    private Vector3 sideCheckColliderSize = new Vector3(.01f, .95f, 1f);
+
+    private bool performWallJump = false;
+    private bool wallJumpLeft = false;
+    private bool wallJumpRight = false;
 
     // Start is called before the first frame update
     void Start()
@@ -49,11 +58,7 @@ public class Pirate : MonoBehaviour
                 jumpLock = true;
             
             // Debug.Log(CanWallJump());
-
-            if(CanWallJump())
-            {
-                
-            }
+            CheckWallJumps();
         }
         // If we were on the ground
         else
@@ -66,20 +71,33 @@ public class Pirate : MonoBehaviour
         }
     }
 
-    private bool CanWallJump()
+    private void CheckWallJumps()
     {
-        Collider[] rightSide = Physics.OverlapBox(new Vector3(transform.position.x + .55f, transform.position.y, transform.position.z), new Vector3(.01f, 0f, 0f));
-        Collider[] leftSide = Physics.OverlapBox(new Vector3(transform.position.x - .55f, transform.position.y, transform.position.z), new Vector3(.01f, 0f, 0f));
-        
+        wallJumpLeft = false;
+        wallJumpRight = false;
+        Collider[] rightSide = Physics.OverlapBox(transform.position + rightOffset, sideCheckColliderSize/2, Quaternion.identity, wallJumpCheckMask);
+        Collider[] leftSide = Physics.OverlapBox(transform.position + leftOffset, sideCheckColliderSize/2, Quaternion.identity, wallJumpCheckMask);
         // Debug.Log($"right side: {rightSide.Length}, Left Side: {leftSide.Length}");
         // foreach(Collider c in rightSide)
         //     Debug.Log($"Right side hit {c.gameObject.name}");
         // foreach(Collider c in leftSide)
         //     Debug.Log($"Left side hit {c.gameObject.name}");
+        
+        if(rightSide.Length > 0)
+            wallJumpRight = true;
+        else if(leftSide.Length > 0)
+            wallJumpLeft = true;
+    }
 
-        if(rightSide.Length > 0 || leftSide.Length > 0)
-            return true;
-        return false;
+    private void DoWallJump()
+    {
+        if(wallJumpRight)
+            rb.velocity = new Vector3(-.5f, .5f, 0) * jumpPower/10;
+            // rb.AddForce(new Vector3(.5f, .5f, 0) * jumpPower, ForceMode.Impulse);
+        else if(wallJumpLeft)
+            rb.velocity = new Vector3(.5f, .5f, 0) * jumpPower/10;
+            // rb.AddForce(new Vector3(.5f, .5f, 0) * jumpPower, ForceMode.Impulse);
+        
     }
 
     private bool CheckGrounded()
@@ -105,6 +123,14 @@ public class Pirate : MonoBehaviour
             airJumpLock = true;
         }
 
+        if(performWallJump)
+        {
+            DoWallJump();
+            airJump = false;
+            airJumpLock = false;
+            performWallJump = false;
+        }
+
         if(direction == 0)
             return;
             
@@ -119,12 +145,14 @@ public class Pirate : MonoBehaviour
     {
         if(!jump && !jumpLock)
             jump = true;
+        else if(wallJumpRight || wallJumpLeft)
+            performWallJump = true;
         else if(!grounded && !airJump && !airJumpLock)
             airJump = true;
     }
 
     private void OnDrawGizmos() {
-        Gizmos.DrawCube(new Vector3(transform.position.x + .51f, transform.position.y + 0.5f, transform.position.z), new Vector3(.01f, 1f, 1f));
-        Gizmos.DrawCube(new Vector3(transform.position.x - .51f, transform.position.y + 0.5f, transform.position.z), new Vector3(.01f, 1f, 1f));
+        Gizmos.DrawCube(transform.position + rightOffset, sideCheckColliderSize);
+        Gizmos.DrawCube(transform.position + leftOffset, sideCheckColliderSize);
     }
 }
