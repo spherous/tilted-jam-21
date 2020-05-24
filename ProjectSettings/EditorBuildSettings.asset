@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu/src/Scenes/Level1_Demo.unity
     guid: a29848c6cbdc245439fd7641ab34b8bc
+  - enabled: 1
+    path: Assets/Scenes/AveaScene.unity
+    guid: 28da8f35eec3c6d4db7c1623717b3a65
+  - enabled: 1
+    path: Assets/Scenes/StoryStart.unity
+    guid: e51e1cf934e55294ba799d3e7322816b
   m_configObjects: {}
