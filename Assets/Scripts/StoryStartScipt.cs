@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StoryStartScipt : MonoBehaviour
 {
@@ -14,23 +15,29 @@ public class StoryStartScipt : MonoBehaviour
     public float start_idle_time = 6.0f;
     public float start_jump_time = 8.0f;
     public float start_ride_time = 10.0f;
+    public float start_game = 15.0f;
     // Start is called before the first frame update
     void Start()
     {
-        pirate.SetBool("walking", true);
+        //pirate.SetTrigger("Idle");
         //rb_pirate = gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > start_ride_time)
+        if (Time.time > start_game)
+        {
+            SceneManager.LoadScene("AveaScene");
+        }
+        else if (Time.time > start_ride_time)
         {
             pirate.SetBool("riding", true);
-            pirate.SetBool("jump", false);
+            pirate.SetBool("falling", false);
         }
         else if (Time.time > start_jump_time)
         {
+            pirate.SetBool("falling", true);
             float percent = (Time.time - start_jump_time) / (start_ride_time - start_jump_time);
             Debug.Log(percent);
             rb_pirate.MovePosition(
@@ -38,11 +45,11 @@ public class StoryStartScipt : MonoBehaviour
         }
         else if (Time.time > start_idle_time)
         {
-            pirate.SetBool("jump", true);
             pirate.SetBool("walking", false);
         }
         else if (Time.time > start_walking_time)
         {
+            pirate.SetBool("walking", true);
             Vector3 offset = Vector3.zero;
             offset.x = vel_pirate;
             //rb_pirate.MovePosition(rb_pirate.position + offset);
