@@ -23,8 +23,12 @@ public class StoryStartScipt : MonoBehaviour
         //rb_pirate = gameObject.GetComponent<Rigidbody>();
     }
 
+    public void StartGame()
+    {
+        SceneManager.LoadScene("AveaScene");
+    }
     // Update is called once per frame
-    void Update()
+    void UpdateHardCodedAnimation()
     {
         if (Time.time > start_game)
         {
